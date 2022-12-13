@@ -19,7 +19,7 @@ int main()
 
     // This is just arbitrary code. Change it to test whatever you like about your 
     // hash table implementation.
-    for(size_t i = 0; i < 10; i++){
+    for(size_t i = 0; i < 23; i++){
         std::stringstream ss;
         ss << "hi" << i;
         ht.insert({ss.str(), i});
@@ -29,11 +29,14 @@ int main()
         ht["hi1"] += 1;
         cout << "Incremented hi1's value to: " << ht["hi1"] << endl;
     }
+
+    
     if( ht.find("doesnotexist") == nullptr ){
         cout << "Did not find: doesnotexist" << endl;
     }
     cout << "HT size: " << ht.size() << endl;
     ht.remove("hi7");
+    cout << "Removed hi7" << endl;
     ht.remove("hi9");
     cout << "HT size: " << ht.size() << endl;
     if( ht.find("hi9") != nullptr ){
@@ -43,6 +46,11 @@ int main()
         cout << "Did not find hi9" << endl;
     }
     ht.insert({"hi7",17});
+    if( ht.find("hi7") != nullptr ){
+        cout << "Found hi7" << endl;
+    }
     cout << "size: " << ht.size() << endl;
+
+    
     return 0;
 }

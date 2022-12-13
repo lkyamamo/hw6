@@ -43,11 +43,9 @@ struct MyStringHash {
             //adding up the values
             for(size_t i = 0; i < 6; ++i)
             {
-                std::cout<< letterDigitToNumber(a[i]) << std::endl;
                 w[4] += pow(36,i) * letterDigitToNumber(a[i]);
             }
             
-            std::cout << "w[4] = " << w[4] << std::endl;
             return w[4] * rValues[4];
         }
         //length greater than 6 characters
@@ -75,7 +73,6 @@ struct MyStringHash {
                 //adding up the values
                 for(int k = 0; k < 6; ++k)
                 {
-                    //std::cout<< letterDigitToNumber(b[j]) << std::endl;
                     w[counter] += pow(36,k) * letterDigitToNumber(b[k]);
                 }
                 --counter;
@@ -84,8 +81,6 @@ struct MyStringHash {
             HASH_INDEX_T temp = 0;
             for(int i = 0; i < 5; ++i)
             {
-                std::cout << "w[" << i << "] = " << w[i] << std::endl;
-
                 //multiply by correlated rValue and add to hash total
                 temp += rValues[i] * w[i];
             }

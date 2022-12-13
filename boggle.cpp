@@ -93,5 +93,92 @@ bool boggleHelper(const std::set<std::string>& dict, const std::set<std::string>
 								   std::string word, std::set<std::string>& result, unsigned int r, unsigned int c, int dr, int dc)
 {
 //add your solution here!
+	//true means we have found the longest possible string
 
+	if(!(c < board[0].size() && r < board.size()) || prefix.find(word) == prefix.end())
+	{
+		return true;
+	}
+	
+	word += board[r][c];
+
+	bool temp = boggleHelper(dict,prefix,board,word,result,r+dr,c+dc,dr,dc);
+
+	if(temp == true)
+	{
+		//find longest string to add to result
+		while(word != "")
+		{
+			if(dict.find(word) != dict.end())
+			{
+				result.insert(word);
+				break;
+			}
+			word = word.substr(0,word.length()-1);
+		}
+	}
+	else if(word.length() == 1)
+	{
+		word = "";
+		if(c + 1 < board[0].size())
+		{
+			boggleHelper(dict,prefix,board,word,result,r,c+1,dr,dc);
+		}
+		else
+		{
+			boggleHelper(dict,prefix,board,word,result,r+1,0,dr,dc);
+		}
+	}
+	return false;
+
+
+
+
+
+	/*
+	if(!(c < board[0].size() && r < board.size()))
+	{
+		return true;
+	}
+
+	//add character to word
+	word += board[r][c];
+
+	//terminate condition of no longer being a prefix
+	if (prefix.find(word) == prefix.end()) 
+	{
+		return true;
+	}
+	
+	
+
+	bool temp = true;
+	//if getting true continue adding letters
+	temp = boggleHelper(dict,prefix,board,word,result,r+dr,c+dc,dr,dc);
+
+	if(temp == true)
+	{
+		if (dict.find(word) != dict.end())
+		{
+			result.insert(word);
+		}
+		return false;
+	}
+
+	//if getting false, backtrack and start at new location
+	if(temp == false && word.length() == 1)
+	{
+		word = "";
+		if(c + 1 < board[0].size())
+		{
+			boggleHelper(dict,prefix,board,word,result,r,c+1,dr,dc);
+		}
+		else
+		{
+			boggleHelper(dict,prefix,board,word,result,r+1,0,dr,dc);
+		}
+	}
+	return false;
+	*/
+	
 }
