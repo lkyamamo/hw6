@@ -382,8 +382,9 @@ void HashTable<K,V,Prober,Hash,KEqual>::remove(const KeyType& key)
     if(item != nullptr)
     {
         item -> deleted = true;
+        --counter_;
     }
-    --counter_;
+
 }
 
 
