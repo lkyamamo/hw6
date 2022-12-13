@@ -359,11 +359,6 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
     else if(kequal_((table_[current] -> item).first, p.first))
     {
         (table_[current] -> item).second = p.second;
-        if(table_[current] -> deleted == true)
-        {
-            table_[current] -> deleted = false;
-            ++counter_;
-        }
         return;
     }
     //item is in a deleted state but not null
@@ -371,6 +366,8 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
     {
         delete table_[current];
         table_[current] = item;
+        ++counter_;
+        return;
     }
 
     ++counter_;
@@ -506,7 +503,7 @@ HASH_INDEX_T HashTable<K,V,Prober,Hash,KEqual>::probe(const KeyType& key) const
         }
         // fill in the condition for this else if statement which should 
         // return 'loc' if the given key exists at this location
-        else if(kequal_((table_[loc] -> item).first, key)) {
+        else if(kequal_((table_[loc] -> item).first, key) && table_[loc] -> deleted == false) {
             return loc;
         }
         loc = prober_.next();

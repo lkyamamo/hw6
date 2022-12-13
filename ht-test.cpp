@@ -29,7 +29,10 @@ int main()
         ht["hi1"] += 1;
         cout << "Incremented hi1's value to: " << ht["hi1"] << endl;
     }
-
+    cout << "HT size: " << ht.size() << endl;
+    cout << "Inserting duplicate" << endl;
+    ht.insert({"hi1",5});
+    cout << "HT size: " << ht.size() << endl;
     
     if( ht.find("doesnotexist") == nullptr ){
         cout << "Did not find: doesnotexist" << endl;
@@ -38,6 +41,7 @@ int main()
     ht.remove("hi7");
     cout << "Removed hi7" << endl;
     ht.remove("hi9");
+    cout << "Removed hi9" << endl;
     cout << "HT size: " << ht.size() << endl;
     if( ht.find("hi9") != nullptr ){
         cout << "Found hi9" << endl;
