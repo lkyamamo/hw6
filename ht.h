@@ -350,21 +350,29 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
         throw std::logic_error("No Valid Location Found");
         return;
     }
-    else if (kequal_((table_[current] -> item).first, p.first)) 
-    {
-        (table_[current] -> item).second = p.second;
-        return;
-    }
 
     HashItem* item = new HashItem(p);
+    
+    //location null
+    if(table_[current] == nullptr) table_[current] = item;
+    //checking for duplicate at location
+    else if(kequal_((table_[current] -> item).first, p.first))
+    {
+        (table_[current] -> item).second = p.second;
+        if(table_[current] -> deleted == true)
+        {
+            table_[current] -> deleted = false;
+            ++counter_;
+        }
+        return;
+    }
     //item is in a deleted state but not null
-    if(table_[current] != nullptr)
+    else
     {
         delete table_[current];
         table_[current] = item;
     }
-    //location is null
-    else table_[current] = item;
+
     ++counter_;
     ++totalElements_;
 }
