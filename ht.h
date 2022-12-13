@@ -350,6 +350,11 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
         throw std::logic_error("No Valid Location Found");
         return;
     }
+    else if ((table_[current] -> item).first == p.first) 
+    {
+        (table_[current] -> item).second = p.second;
+        return;
+    }
 
     HashItem* item = new HashItem(p);
     //item is in a deleted state but not null
