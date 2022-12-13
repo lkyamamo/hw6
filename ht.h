@@ -350,7 +350,7 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
         throw std::logic_error("No Valid Location Found");
         return;
     }
-    else if ((table_[current] -> item).first == p.first) 
+    else if (kequal_((table_[current] -> item).first, p.first)) 
     {
         (table_[current] -> item).second = p.second;
         return;
